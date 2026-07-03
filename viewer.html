@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily-Read — Markdown Viewer</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b1020;color:#e7ecff}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#0b1020;color:#e7ecff}
+  .wrap{max-width:960px;margin:0 auto;padding:18px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 16px;border-bottom:1px solid #1f2b55}
+  .brand{font-weight:700;font-size:18px;color:#fff}
+  .brand a{color:#aab0cc;text-decoration:none;font-weight:400;font-size:13px}
+  select,input{background:#0f1730;color:#e7ecff;border:1px solid #313e6b;border-radius:10px;padding:8px 10px;font-size:13px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .paper{background:#111a36;border:1px solid #1f2b55;border-radius:14px;padding:18px;margin-top:14px}
+  .paper img{max-width:100%;height:auto;border-radius:10px}
+  .paper pre{background:#0b1020;border:1px solid #1f2b55;border-radius:10px;padding:12px;overflow:auto}
+  .paper code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#ffd6e0}
+  .paper a{color:#7c9cff}
+  .paper table{border-collapse:collapse;width:100%}
+  .paper th,.paper td{border:1px solid #1f2b55;padding:8px;font-size:13px}
+  .paper blockquote{border-left:4px solid #00d4aa;margin:0;padding:10px 14px;background:#0e1a30;color:#cfe8de;border-radius:0 10px 10px 0}
+  .hint{color:#aab0cc;font-size:12px;margin-top:8px}
+  footer{padding:20px 0;color:#7b83a0;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Daily-Read <a href="index.html">← về trang chủ</a></div>
+    <div class="row">
+      <select id="filePicker" onchange="loadMarkdown(this.value)">
+        <option value="">-- chọn file markdown --</option>
+        <option value="README.md">README.md</option>
+        <option value="workflow-spec.md">workflow-spec.md</option>
+        <option value="research-brief.md">research-brief.md</option>
+        <option value="verification-report.md">verification-report.md</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="paper" id="content">
+    <p class="hint">Chọn một file bên trên để đọc trực tiếp. hoặc gắn <code>?file=workflow-spec.md</code> vào URL.</p>
+  </div>
+
+  <footer>Daily-Read markdown viewer — render bằng marked.js, dùng được ngay trên GitHub Pages.</footer>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const fileParam = params.get("file");
+  const picker = document.getElementById("filePicker");
+  if (fileParam) picker.value = fileParam;
+
+  async function loadMarkdown(file) {
+    if (!file) return;
+    const el = document.getElementById("content");
+    el.innerHTML = `<div style="color:#aab0cc">Đang tải <b>${file}</b>…</div>`;
+    try {
+      const res = await fetch(file, {cache:"no-store"});
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const md = await res.text();
+      el.innerHTML = marked.parse(md, {gfm:true, breaks:false});
+      try { history.replaceState(null, "", `?file=${encodeURIComponent(file)}`); } catch {}
+    } catch (e) {
+      el.innerHTML = `<div style="color:#ffb3b3">Không đọc được file: ${e.message}</div>`;
+    }
+  }
+
+  if (fileParam) loadMarkdown(fileParam);
+</script>
+</body>
+</html>
