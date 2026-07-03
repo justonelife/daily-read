@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily-Read — Autonomous AI Workflow</title>
+<style>
+  :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b1020;color:#e7ecff}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0b1020,#0f1535);color:#e7ecff;line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:24px}
+  header{display:flex;align-items:center;gap:16px;padding:18px 0}
+  .logo{width:56px;height:56px;border-radius:16px;background:conic-gradient(from 0deg,#7c5cff,#00d4aa,#ff7b9c,#7c5cff);animation:spin 8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  h1{font-size:26px;margin:0}
+  .sub{color:#aab0cc;font-size:14px}
+  section{background:#111a36;border:1px solid #1f2b55;border-radius:18px;padding:18px;margin:16px 0}
+  h2{font-size:18px;margin:0 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .card{background:#0f1730;border:1px solid #313e6b;border-radius:14px;padding:14px;color:#e7ecff;text-decoration:none;display:block;transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-2px);border-color:#7c5cff}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .card p{margin:0;color:#aab0cc;font-size:13px}
+  .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#1a2340;border:1px solid #303866;font-size:12px;color:#aab0cc;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"></div>
+    <div>
+      <h1>Daily-Read</h1>
+      <div class="sub">Tự động hóa AI workflow — từ thẻ Kanban đến kết quả.</div>
+      <div class="tag">Hermes Kanban</div>
+      <div class="tag">Claude Code</div>
+      <div class="tag">Codex</div>
+      <div class="tag">ChatGPT</div>
+      <div class="tag">Gemini</div>
+      <div class="tag">Drive</div>
+      <div class="tag">Asana</div>
+      <div class="tag">GitHub</div>
+      <div class="tag">Bitbucket</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Tổng quan</h2>
+    <p>Bạn chỉ cần tạo một thẻ <strong>Hermes Kanban</strong>, toàn bộ pipeline sẽ tự chạy: phân tích yêu cầu → thiết kế kiến trúc → viết mã → review → PR/CI → upload artifact → cập nhật Asana → đóng thẻ Done. Không cần bạn đứng giữa chuyển tin nhắn giữa các AI.</p>
+  </section>
+
+  <section>
+    <h2>Tài liệu</h2>
+    <div class="grid">
+      <a class="card" href="README.md">
+        <h3>README</h3>
+        <p>Hướng dẫn tổng quan, chuẩn bị secrets, cách vận hành hàng ngày.</p>
+      </a>
+      <a class="card" href="workflow-spec.md">
+        <h3>Workflow Spec</h3>
+        <p>Spec end-to-end: trigger, từng bước handoff, data contract, fallback, approval gates.</p>
+      </a>
+      <a class="card" href="research-brief.md">
+        <h3>Research Brief</h3>
+        <p>Nghiên cứu pattern hiện có: Symphony, OpenHands, Bernstein, n8n/LangGraph, MCP.</p>
+      </a>
+      <a class="card" href="verification-report.md">
+        <h3>Verification Report</h3>
+        <p>Kết quả đối chiếu yêu cầu thực tế với spec, gap còn lại và remediation.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Repo</h2>
+    <p>Mọi tài liệu và artifact workflow sẽ được commit vào repo này. Bạn có thể thêm markdown mạ and tự thêm vào landing page này.</p>
+    <a class="card" href="https://github.com/justonelife/daily-read" target="_blank" rel="noreferrer">
+      <h3>justonelife/daily-read</h3>
+      <p>Xem source, issues, và các file markdown gốc.</p>
+    </a>
+  </section>
+
+  <footer>Daily-Read — biến ý tưởng thành output mà không cần người trung gian.</footer>
+</div>
+</body>
+</html>
